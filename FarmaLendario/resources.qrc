@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="logoFarmPussetto">resources/favicon.ico</file>
+        <file alias="background">resources/Isologofarmacia.png</file>
+        <file alias="logo">resources/svg.png</file>
+    </qresource>
+</RCC>
