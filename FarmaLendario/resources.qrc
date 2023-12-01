@@ -4,4 +4,7 @@
         <file alias="background">resources/Isologofarmacia.png</file>
         <file alias="logo">resources/svg.png</file>
     </qresource>
+    <qresource prefix="/fonts">
+        <file alias="tungsten.ttf">resources/Tungsten/Tungsten-SemiBold.ttf</file>
+    </qresource>
 </RCC>

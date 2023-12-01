@@ -2,34 +2,43 @@
 #define MONTH_H
 
 #include <QObject>
+#include <QVBoxLayout>
+#include <QGridLayout>
 #include "day.h"
+
+
+class clickableLb :public QLabel{
+    Q_OBJECT
+public:
+    explicit clickableLb(QWidget *parent = nullptr);
+    explicit clickableLb(const QString &text = nullptr,QWidget *parent = nullptr);
+
+public slots:
+    void mousePressEvent(QMouseEvent *event);
+signals:
+    void clicked();
+};
+class clickableFr :public QLabel{
+    Q_OBJECT
+public:
+    explicit clickableFr(QWidget *parent = nullptr);
+
+public slots:
+    void mousePressEvent(QMouseEvent *event);
+signals:
+    void clicked();
+};
 
 class Month : public QFrame
 {
     Q_OBJECT
 public:
-    enum MONTH{
-        MO_JANUARY,
-        MO_FEBRUARY,
-        MO_MARCH,
-        MO_APRIL,
-        MO_MAY,
-        MO_JUNE,
-        MO_JULY,
-        MO_AUGUST,
-        MO_SEPTEMBER,
-        MO_OCTOBER,
-        MO_NOVEMBER,
-        MO_DECEMBER,
-
-        MO_LAST
-    };
-
-    explicit Month(QFrame *parent = nullptr, MONTH month = MO_LAST, int startDay = 0,int year = 2023);
+    explicit Month(QWidget *parent = nullptr, MONTH month = MO_LAST, int year = 2023);
     //    MES mes;
     int getNumberOfDays() const;
 
     void setDeTurno(int day, FARMACIAS deTurno);
+    void setDeTurnoDaySelected(FARMACIAS deTurno);
 
     int getStartDay() const;
     void setStartDay(int newStartDay);
@@ -42,12 +51,20 @@ public:
 
     void resize(const QSize &size);
 
+    void paintEvent(QPaintEvent *e);
 
+private slots:
+    void onDayClicked();
 private:
     MONTH month;
     QList<Day*> days;
-    QLabel *lbName;
+    QList<QFrame*> fillers;
+
+    clickableLb *lbName;
     QFrame *daysFrame;
+    QVBoxLayout *vL;
+    QGridLayout *gL ;
+    int currentDayClicked = 0;
     int startDay;
     int numberOfDays;
     int weeks = 1;
@@ -55,6 +72,9 @@ private:
     void setDays();
     void updateLayout();
 signals:
+    void dayClicked(Day *day);
+    void monthClicked(Month *month);
+
 
 };
 

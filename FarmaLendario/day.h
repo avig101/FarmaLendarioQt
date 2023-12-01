@@ -1,25 +1,15 @@
 #ifndef DAY_H
 #define DAY_H
 
-#include <QFrame>
 #include <QLabel>
 #include "templates.h"
 
-class Day : public QFrame
+
+class Day : public MagicFrame
 {
     Q_OBJECT
-public:
-    enum DAY{
-        DA_DOMINGO,
-        DA_LUNES,
-        DA_MARTES,
-        DA_MIERCOLES,
-        DA_JUEVES,
-        DA_VIERNES,
-        DA_SABADO,
 
-        DA_LAST
-    };
+public:
     enum Info{
         IN_NUMBER,
         IN_NAME,
@@ -30,33 +20,28 @@ public:
     };
 
     explicit Day(QWidget *parent = nullptr, int number = 1,DAY dia = DA_LAST);
+    explicit Day();
+
     FARMACIAS getDeTurno() const;
     void setDeTurno(FARMACIAS newDeTurno);
 
+    int getNumber() const;
+    void setNumber(int newNumber);
+
+
 private:
     DAY day;
-    int number;
+    int number = -1;
     FARMACIAS deTurno;
     QLabel *info[IN_LAST];
 
-
-signals:
-
 };
-static const QString dayTxt[Day::DA_LAST]{
-                                          "Domingo",
-                                          "Lunes",
-                                          "Martes",
-                                          "Miercoles",
-                                          "Jueves",
-                                          "Viernes",
-                                          "Sábado"
-};
+
 static const QString infoObjectName[Day::IN_LAST]{
-    "N°",
-    "farmName",
-    "farmDir",
-    "farmPhone"
+    "Dia",
+    "Farmacia",
+    "Direccion",
+    "Telefono"
 };
 
 #endif // DAY_H

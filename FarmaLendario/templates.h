@@ -1,6 +1,9 @@
 #ifndef TEMPLATES_H
 #define TEMPLATES_H
+#include <QFrame>
 #include <QString>
+#include "qevent.h"
+
 
 enum FARMACIAS{
     FARM_PUSSETTO,
@@ -67,5 +70,80 @@ static const QString farmTelefono[FARM_LAST]{
     "420723"
 };
 
+enum MONTH{
+    MO_JANUARY,
+    MO_FEBRUARY,
+    MO_MARCH,
+    MO_APRIL,
+    MO_MAY,
+    MO_JUNE,
+    MO_JULY,
+    MO_AUGUST,
+    MO_SEPTEMBER,
+    MO_OCTOBER,
+    MO_NOVEMBER,
+    MO_DECEMBER,
+
+    MO_LAST
+};
+static const QString mesTxt[MO_LAST]{
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre"
+};
+
+enum DAY{
+    DA_DOMINGO,
+    DA_LUNES,
+    DA_MARTES,
+    DA_MIERCOLES,
+    DA_JUEVES,
+    DA_VIERNES,
+    DA_SABADO,
+
+    DA_LAST
+};
+
+static const QString dayTxt[DA_LAST]{
+                                          "Domingo",
+                                          "Lunes",
+                                          "Martes",
+                                          "Miercoles",
+                                          "Jueves",
+                                          "Viernes",
+                                          "Sábado"
+};
+
+class MagicFrame : public QFrame
+{
+    Q_OBJECT
+public:
+    explicit MagicFrame(QWidget *parent = nullptr);
+
+
+    bool isCurrent();
+    void setCurrent(bool isCurrent);
+
+public slots:
+    void mousePressEvent(QMouseEvent *event);
+    void enterEvent(QEnterEvent *event);
+    void leaveEvent(QEvent *event);
+private:
+    bool current = false;
+
+signals:
+    void clicked();
+    void currentSig(bool clicked);
+
+};
 
 #endif // TEMPLATES_H
